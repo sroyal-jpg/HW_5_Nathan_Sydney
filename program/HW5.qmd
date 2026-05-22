@@ -39,12 +39,38 @@ library(here)
 
 ## Create Vectors
 
+For electricity cost to influence the production and recycling rates, we could create a random uniform distribution with electricity costs, that then ranks them as high or low depending on the value of the output – for it to influence production and recycling, it would need to go first.
+
+- Range 10-30 cents/kWh (based on average electricity costs)
+
+- The function determines high vs low and reports that value and score
+
+  - High = equal to or above 16 cents/kWh
+
+  - Low = below 16 cents/kWh
+
+### Module 1: Cost of Electricity 
+
+- there need to be more clear inputs if this is going to work as a function
+
+- ok I'll get rid of the for loop and instead have specified scenarios for different days and times
+
+```{r}
+
+source(here("modules/electricity_cost.R"))
+
+electricity_rates<- cost_of_electric(1,"days")
+
+electricity_rates
+
+```
+
+### Metal Ore Dataframe
+
 ```{r}
 
 # make a dataframe with metal ore information
 ## we don't need to keep this, I just used it for testing
-
-# to allow for cost of electricity to influence the recycling and production rates, there would need to be if statements within the dataframe with one for a high production and recycling scenario, and one for a low production and recycling scenario
 
 # named the different metal types
 metal= c("steel","aluminum","copper")
@@ -97,6 +123,12 @@ produced_metal
 ```{r}
 # collection
 source(here("modules/collection_scrap.R"))
+
+# uniform distribution between 10 and 30 cents/kwh 
+
+# if statement, if above 16, then high, otherwise, low
+
+# if high use low production and recycling, if low use high production and recycling
 
 ## run it
 collected_scrap<- collection_scrap(produced_metal,
