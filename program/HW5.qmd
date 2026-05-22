@@ -42,14 +42,23 @@ library(here)
 ```{r}
 
 # make a dataframe with metal ore information
-## steel, aluminum, copper
 ## we don't need to keep this, I just used it for testing
 
+# to allow for cost of electricity to influence the recycling and production rates, there would need to be if statements within the dataframe with one for a high production and recycling scenario, and one for a low production and recycling scenario
+
+# named the different metal types
 metal= c("steel","aluminum","copper")
 
+# made a dataframe for metal ore
 metal_ore<- data.frame(
+  
+  # metal row is the names of the metal types
   metal=metal,
+  
+  # mass is how much metal is extracted, and is randomized between 1 and 100 MT
   mass = runif(length(metal), 1,100),
+  
+  # p
   production_rate = runif(length(metal), 0,1),
   recycling_rate = runif(length(metal), 0,1),
   collection_rate = runif(length(metal), 0,1),
@@ -68,7 +77,7 @@ recycled_metal<- 0
 
 ## Modules
 
-### Module 1: Metal Production 
+### Module 1: Metal Production
 
 ```{r}
 
@@ -83,7 +92,7 @@ produced_metal
 
 ```
 
-### Module 2: Collection 
+### Module 2: Collection
 
 ```{r}
 # collection
@@ -96,14 +105,14 @@ collected_scrap<- collection_scrap(produced_metal,
 collected_scrap
 ```
 
-### Module 3: Recycling 
+### Module 3: Recycling
 
 ```{r}
 # recycling
 source(here())
 ```
 
-### Module 4: Waste 
+### Module 4: Waste
 
 ```{r}
 # waste
@@ -111,7 +120,7 @@ source(here())
 
 ```
 
-### Module 5: Cost of Electricity 
+### Module 5: Cost of Electricity
 
 ```{r}
 # cost of electricity
