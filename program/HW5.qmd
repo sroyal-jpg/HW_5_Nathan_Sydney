@@ -26,7 +26,6 @@ Workflow:
 ```{r}
 # clear the environment
 rm(list = ls())
-sd
 
 ```
 
@@ -49,7 +48,7 @@ For electricity cost to influence the production and recycling rates, we could c
 
   - Low = below 16 cents/kWh
 
-### Module 1: Cost of Electricity 
+### Module 1: Cost of Electricity
 
 - there need to be more clear inputs if this is going to work as a function
 
@@ -59,18 +58,20 @@ For electricity cost to influence the production and recycling rates, we could c
 
 source(here("modules/electricity_cost.R"))
 
-electricity_rates<- cost_of_electric(1,"days")
+electricity_rates<- cost_of_electric(1,"Tuesday")
 
 electricity_rates
-
 ```
 
-### Metal Ore Dataframe
+### Metal Ore Data frame
 
 ```{r}
 
 # make a dataframe with metal ore information
 ## we don't need to keep this, I just used it for testing
+
+
+# make different parts of the dataframe based on if electricity is high or low
 
 # named the different metal types
 metal= c("steel","aluminum","copper")
@@ -90,6 +91,42 @@ metal_ore<- data.frame(
   collection_rate = runif(length(metal), 0,1),
   electricity_cost = runif(length(metal), 0,100)
 )
+
+############ TRYING TO VARY THINGS BASED ON THE RATES
+# named the different metal types
+metal= c("steel","aluminum","copper")
+
+# made a data frame for metal ore
+metal_ore<- data.frame(
+  
+  # metal row is the names of the metal types
+  metal=metal,
+  
+  # mass is how much metal is extracted, and is randomized between 1 and 100 MT
+  mass = runif(length(metal), 1,100),
+  
+# production rate on a high electricity day
+if (electricity == "high") {
+production_rate = runif(length(metal), 0,0.5)},
+
+# production rate on a low electricity day
+if (electricity == "low") {
+  production_rate = runif(length(metal), 0.6,1)},
+
+if (electricity == "high") {
+# recycling rate on a high electricity day
+  recycling_rate = runif(length(metal), 0,1)},
+
+if (electricity == "low") {
+  # recycling rate on a high electricity day
+  recycling_rate = runif(length(metal), 0,1)},
+
+# collection rate stays the same
+  collection_rate = runif(length(metal), 0,1),
+)
+
+
+
 ```
 
 ## Initialize Values
