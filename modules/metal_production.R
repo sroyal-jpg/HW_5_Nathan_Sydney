@@ -17,9 +17,9 @@
 
 metal_production = function(metal_ore, recycled_metal, production_rate) {
   
-  production_rate = (metal_ore + recycled_metal) * (production_rate)
+  produced_metal = (metal_ore + recycled_metal) * (production_rate)
   
-  return(production_rate)
+  return(produced_metal)
   
 }
 
