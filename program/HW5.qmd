@@ -9,15 +9,15 @@ editor: visual
 
 Workflow:
 
-1.  Metal Production (S)
+1.  Cost of Electricity (S)
 
-2.  Collection (S)
+2.  Metal Production (S)
 
-3.  Recycling (N)
+3.  Collection (S)
 
-4.  Waste (N)
+4.  Recycling (N)
 
-5.  Cost of Electricity (S)
+5.  Waste (N)
 
 6.  Metal Switching (N)
 
@@ -50,17 +50,40 @@ For electricity cost to influence the production and recycling rates, we could c
 
 ### Module 1: Cost of Electricity
 
-- there need to be more clear inputs if this is going to work as a function
-
-- ok I'll get rid of the for loop and instead have specified scenarios for different days and times
+- **I had to put this first so that it actually influences the production and recycling rates**
 
 ```{r}
 
 source(here("modules/electricity_cost.R"))
 
+# default is a random scenario, but can be changed
 electricity_rates<- cost_of_electric(1,"Tuesday")
-
 electricity_rates
+
+
+# this can be run for multiple days -- right now it's set to have the highest electricity costs during months, 6, 7, and 8 as well as during the weekdays. 
+
+## weekends have a 50% discount on electricity
+
+```
+
+### **Run the Electricity module 2x - choose weekend or weekday**
+
+**Weekend**
+
+```{r}
+#### THIS MODULE NEEDS TO RUN TWICE
+cheap_electricity<- cost_of_electric(6,"Saturday")
+
+electricity_rates <- cheap_electricity
+```
+
+**Weekday**
+
+```{r}
+expensive_electricity<- cost_of_electric(1,"Tuesday")
+
+electricity_rates <- expensive_electricity
 ```
 
 ### Metal Ore Data frame
@@ -68,68 +91,40 @@ electricity_rates
 ```{r}
 
 # make a dataframe with metal ore information
-## we don't need to keep this, I just used it for testing
 
+metal <- c("steel", "aluminum", "copper")
 
-# make different parts of the dataframe based on if electricity is high or low
-
-# named the different metal types
-metal= c("steel","aluminum","copper")
-
-# made a dataframe for metal ore
-metal_ore<- data.frame(
+metal_ore <- data.frame(
+  metal = metal,
+  mass = runif(length(metal), 1, 100),
   
-  # metal row is the names of the metal types
-  metal=metal,
-  
-  # mass is how much metal is extracted, and is randomized between 1 and 100 MT
-  mass = runif(length(metal), 1,100),
-  
-  # p
-  production_rate = runif(length(metal), 0,1),
-  recycling_rate = runif(length(metal), 0,1),
-  collection_rate = runif(length(metal), 0,1),
-  electricity_cost = runif(length(metal), 0,100)
+  # I chose random percentages for the collection rates
+  collection_rate = (c(0.95, 0.7, 0.5))
 )
 
-############ TRYING TO VARY THINGS BASED ON THE RATES
-# named the different metal types
-metal= c("steel","aluminum","copper")
-
-# made a data frame for metal ore
-metal_ore<- data.frame(
-  
-  # metal row is the names of the metal types
-  metal=metal,
-  
-  # mass is how much metal is extracted, and is randomized between 1 and 100 MT
-  mass = runif(length(metal), 1,100),
-  
-# production rate on a high electricity day
-if (electricity == "high") {
-production_rate = runif(length(metal), 0,0.5)},
-
-# production rate on a low electricity day
-if (electricity == "low") {
-  production_rate = runif(length(metal), 0.6,1)},
-
-if (electricity == "high") {
-# recycling rate on a high electricity day
-  recycling_rate = runif(length(metal), 0,1)},
-
-if (electricity == "low") {
-  # recycling rate on a high electricity day
-  recycling_rate = runif(length(metal), 0,1)},
-
-# collection rate stays the same
-  collection_rate = runif(length(metal), 0,1),
+# production rate depends on electricity
+metal_ore$production_rate <- ifelse(
+  electricity_rates$electricity == "high",
+  runif(length(metal), 0, 0.5),
+  runif(length(metal), 0.6, 1)
 )
 
+# recycling rate depends on electricity
+metal_ore$recycling_rate <- ifelse(
+  electricity_rates$electricity == "high",
+  runif(length(metal), 0, 0.5),
+  runif(length(metal), 0.6, 1)
+)
 
+# return the ore information and the electricity rates for context
+metal_ore
+electricity_rates
 
 ```
 
 ## Initialize Values
+
+I had to initialize recycling so that metal production eventually knows what to add once it goes through the next iterations.
 
 ```{r}
 
@@ -140,7 +135,7 @@ recycled_metal<- 0
 
 ## Modules
 
-### Module 1: Metal Production
+### Module 2: Metal Production
 
 ```{r}
 
@@ -148,51 +143,44 @@ recycled_metal<- 0
 source(here("modules/metal_production.R"))
 
 ## run it
-produced_metal<- metal_production(metal_ore$mass[1], 
+produced_metal<- metal_production(metal_ore$mass, 
                                  recycled_metal, 
-                                 metal_ore$production_rate[1])
-produced_metal
+                                 metal_ore$production_rate)
+data.frame(
+  metal= metal, 
+  produced_metal
+)
 
 ```
 
-### Module 2: Collection
+### Module 3: Collection
 
 ```{r}
 # collection
 source(here("modules/collection_scrap.R"))
 
-# uniform distribution between 10 and 30 cents/kwh 
-
-# if statement, if above 16, then high, otherwise, low
-
-# if high use low production and recycling, if low use high production and recycling
-
 ## run it
 collected_scrap<- collection_scrap(produced_metal,
-                                   metal_ore$collection_rate[1])
+                                   metal_ore$collection_rate)
 
-collected_scrap
+data.frame(
+  metal= metal, 
+  collected_scrap
+)
+
 ```
 
-### Module 3: Recycling
+### Module 4: Recycling
 
 ```{r}
 # recycling
 source(here())
 ```
 
-### Module 4: Waste
+### Module 5: Waste
 
 ```{r}
 # waste
-source(here())
-
-```
-
-### Module 5: Cost of Electricity
-
-```{r}
-# cost of electricity
 source(here())
 
 ```
