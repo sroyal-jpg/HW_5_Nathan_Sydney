@@ -181,7 +181,16 @@ source(here())
 
 ```{r}
 # waste
-source(here())
+source(here("modules/waste_loss.R"))
+
+## run it
+waste_metal <- waste_loss(produced_metal, 
+                          metal_ore$collection_rate)
+
+data.frame(
+  metal = metal,
+  waste_metal
+)
 
 ```
 
