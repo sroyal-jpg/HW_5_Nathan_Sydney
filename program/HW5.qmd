@@ -174,7 +174,16 @@ data.frame(
 
 ```{r}
 # recycling
-source(here())
+source(here("modules/scrap_recycling.R"))
+
+## run it
+recycled_metal <- scrap_recycling(collected_scrap, 
+                          metal_ore$recycling_rate)
+
+data.frame(
+  metal = metal,
+  recycled_metal
+)
 ```
 
 ### Module 5: Waste
