@@ -193,12 +193,15 @@ data.frame(
 source(here("modules/waste_loss.R"))
 
 ## run it
-waste_metal <- waste_loss(produced_metal, 
-                          metal_ore$collection_rate)
+waste <- waste_loss(produced_metal, 
+                    metal_ore$collection_rate,
+                    recycled_metal,
+                    metal_ore$recycling_rate,
+                    metal_ore$mass)
 
 data.frame(
   metal = metal,
-  waste_metal
+  waste
 )
 
 ```
@@ -207,6 +210,6 @@ data.frame(
 
 ```{r}
 # metal switching
-source(here())
+source(here("modules/metal_switching.R"))
 
 ```
