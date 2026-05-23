@@ -42,7 +42,7 @@ for (i in 1:nrow(metal_ore)) {
   )
 }
 
-df1 <- data.frame(
+metal_transformed <- data.frame(
   metal = metal,
   produced_metal,
   collected_scrap,
@@ -50,4 +50,4 @@ df1 <- data.frame(
   waste
 )
 
-full_metal_cycle <- merge(metal_ore, df1)
+metal_full_cycle <- merge(metal_ore, metal_transformed)
