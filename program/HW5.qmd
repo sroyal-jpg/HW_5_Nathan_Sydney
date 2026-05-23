@@ -48,6 +48,8 @@ For electricity cost to influence the production and recycling rates, we could c
 
   - Low = below 16 cents/kWh
 
+# Modules
+
 ### Module 1: Cost of Electricity
 
 - **I had to put this first so that it actually influences the production and recycling rates**
@@ -132,8 +134,6 @@ I had to initialize recycling so that metal production eventually knows what to 
 recycled_metal<- 0
 
 ```
-
-## Modules
 
 ### Module 2: Metal Production
 
