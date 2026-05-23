@@ -1,17 +1,10 @@
 
 # METAL SWITCHING MODULE
 
-
-# inputs: metal
-# output: metal
-
-#' @param metal
-
-
 ### THIS IS THE FOR LOOP
 
 ## run each module one row at a time
-produced_metal <- numeric(nrow(metal_ore))  # pre-allocate empty results vector
+produced_metal <- numeric(nrow(metal_ore))  # pre-allocate empty results vectors
 collected_scrap <- numeric(nrow(metal_ore))
 recycled_metal <- numeric(nrow(metal_ore))
 waste <- numeric(nrow(metal_ore))
@@ -42,6 +35,7 @@ for (i in 1:nrow(metal_ore)) {
   )
 }
 
+# create an intermediary data frame for new variables of transformed metals
 metal_transformed <- data.frame(
   metal = metal,
   produced_metal,
@@ -50,4 +44,5 @@ metal_transformed <- data.frame(
   waste
 )
 
+# merge transformed metals and metal ore data frames
 metal_full_cycle <- merge(metal_ore, metal_transformed)
