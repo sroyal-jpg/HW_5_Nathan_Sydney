@@ -219,5 +219,12 @@ Run each module for each metal and combine the results with the original data fr
 ```{r}
 # metal switching
 source(here("modules/metal_switching.R"))
+```
 
+# Results
+
+Metals produced, collected, recycled, and waste generated after one full cycle.
+
+```{r}
+full_metal_cycle
 ```

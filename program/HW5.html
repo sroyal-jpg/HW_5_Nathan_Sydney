@@ -88,7 +88,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#program-schematic" id="toc-program-schematic" class="nav-link" data-scroll-target="#program-schematic">Program Schematic</a></li>
-  <li><a href="#create-vectors" id="toc-create-vectors" class="nav-link" data-scroll-target="#create-vectors">Create Vectors</a></li>
   </ul></li>
   <li><a href="#modules" id="toc-modules" class="nav-link" data-scroll-target="#modules">Modules</a>
   <ul class="collapse">
@@ -98,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#metal-ore-data-frame" id="toc-metal-ore-data-frame" class="nav-link" data-scroll-target="#metal-ore-data-frame">Metal Ore Data frame</a>
   <ul class="collapse">
-  <li><a href="#initialize-values" id="toc-initialize-values" class="nav-link" data-scroll-target="#initialize-values">Initialize Values</a></li>
+  <li><a href="#initialize-recycled-metal-value" id="toc-initialize-recycled-metal-value" class="nav-link" data-scroll-target="#initialize-recycled-metal-value">Initialize Recycled Metal Value</a></li>
   </ul></li>
   <li><a href="#module-2-metal-production" id="toc-module-2-metal-production" class="nav-link" data-scroll-target="#module-2-metal-production">Module 2: Metal Production</a></li>
   <li><a href="#module-3-collection" id="toc-module-3-collection" class="nav-link" data-scroll-target="#module-3-collection">Module 3: Collection</a></li>
@@ -148,6 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Metal Recycling Program</h1>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Clear the environment</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -155,6 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+<p>Load packages: here, knitr</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -186,9 +187,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="create-vectors" class="level2">
-<h2 class="anchored" data-anchor-id="create-vectors">Create Vectors</h2>
-<p>For electricity cost to influence the production and recycling rates, we could create a random uniform distribution with electricity costs, that then ranks them as high or low depending on the value of the output – for it to influence production and recycling, it would need to go first.</p>
+</section>
+<section id="modules" class="level1">
+<h1>Modules</h1>
+<section id="module-1-cost-of-electricity" class="level2">
+<h2 class="anchored" data-anchor-id="module-1-cost-of-electricity">Module 1: Cost of Electricity</h2>
+<p>For electricity cost to influence the production and recycling rates, we created a random uniform distribution with electricity costs that then ranks them as high or low depending on the value of the output.</p>
 <ul>
 <li><p>Range 10-30 cents/kWh (based on average electricity costs)</p></li>
 <li><p>The function determines high vs low and reports that value and score</p>
@@ -196,15 +200,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>High = equal to or above 16 cents/kWh</p></li>
 <li><p>Low = below 16 cents/kWh</p></li>
 </ul></li>
-</ul>
-</section>
-</section>
-<section id="modules" class="level1">
-<h1>Modules</h1>
-<section id="module-1-cost-of-electricity" class="level2">
-<h2 class="anchored" data-anchor-id="module-1-cost-of-electricity">Module 1: Cost of Electricity</h2>
-<ul>
-<li><strong>I had to put this first so that it actually influences the production and recycling rates</strong></li>
 </ul>
 <div class="cell">
 <details class="code-fold">
@@ -217,7 +212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      day month electricity_cost electricity
-1 Tuesday     1         14.53666         low</code></pre>
+1 Tuesday     1         20.76363        high</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show code</summary>
@@ -251,6 +246,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="metal-ore-data-frame" class="level2">
 <h2 class="anchored" data-anchor-id="metal-ore-data-frame">Metal Ore Data frame</h2>
+<p>We created a data frame with initial metal, mass, collection rate, production, rate, and recycling rate data.</p>
+<p>Production rate and recycling rate both use the output from the cost of electricity module.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -285,9 +282,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal     mass collection_rate production_rate recycling_rate
-1    steel 72.10499            0.95       0.8052974      0.7401911
-2 aluminum 54.18339            0.70       0.8052974      0.7401911
-3   copper 12.19749            0.50       0.8052974      0.7401911</code></pre>
+1    steel 61.95984            0.95       0.3505881      0.2447764
+2 aluminum 44.03906            0.70       0.3505881      0.2447764
+3   copper 88.50106            0.50       0.3505881      0.2447764</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show code</summary>
@@ -295,12 +292,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      day month electricity_cost electricity
-1 Tuesday     1         12.83001         low</code></pre>
+1 Tuesday     1         19.39105        high</code></pre>
 </div>
 </div>
-<section id="initialize-values" class="level3">
-<h3 class="anchored" data-anchor-id="initialize-values">Initialize Values</h3>
-<p>I had to initialize recycling so that metal production eventually knows what to add once it goes through the next iterations.</p>
+<section id="initialize-recycled-metal-value" class="level3">
+<h3 class="anchored" data-anchor-id="initialize-recycled-metal-value">Initialize Recycled Metal Value</h3>
+<p>Initialize recycled metal so that metal production eventually knows what to add once it goes through the next iterations.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -312,6 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="module-2-metal-production" class="level2">
 <h2 class="anchored" data-anchor-id="module-2-metal-production">Module 2: Metal Production</h2>
+<p>From starting metal mass plus recycled metal, use production rate to calculate how much metal is produced.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -329,14 +327,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal produced_metal
-1    steel      58.065969
-2 aluminum      43.633742
-3   copper       9.822604</code></pre>
+1    steel       21.72238
+2 aluminum       15.43957
+3   copper       31.02742</code></pre>
 </div>
 </div>
 </section>
 <section id="module-3-collection" class="level2">
 <h2 class="anchored" data-anchor-id="module-3-collection">Module 3: Collection</h2>
+<p>From produced metal, use collection rate to calculate how much scrap metal is collected.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -354,14 +353,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal collected_scrap
-1    steel       55.162670
-2 aluminum       30.543619
-3   copper        4.911302</code></pre>
+1    steel        20.63626
+2 aluminum        10.80770
+3   copper        15.51371</code></pre>
 </div>
 </div>
 </section>
 <section id="module-4-recycling" class="level2">
 <h2 class="anchored" data-anchor-id="module-4-recycling">Module 4: Recycling</h2>
+<p>From collected scrap metal, use recycling rate to calculate how much metal is recycled.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -379,14 +379,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal recycled_metal
-1    steel      40.830920
-2 aluminum      22.608117
-3   copper       3.635302</code></pre>
+1    steel       5.051271
+2 aluminum       2.645470
+3   copper       3.797390</code></pre>
 </div>
 </div>
 </section>
 <section id="module-5-waste" class="level2">
 <h2 class="anchored" data-anchor-id="module-5-waste">Module 5: Waste</h2>
+<p>From the remaining produced metal not collected and collected scrap not recycled, use collection rate and recycling rate to calculate how much metal and ore waste is generated.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -406,15 +407,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>     metal     waste
-1    steel 27.550559
-2 aluminum 29.513555
-3   copper  8.230668</code></pre>
+<pre><code>     metal    waste
+1    steel 45.13842
+2 aluminum 35.22929
+3   copper 75.85523</code></pre>
 </div>
 </div>
 </section>
 <section id="module-6-metal-switching-module" class="level2">
 <h2 class="anchored" data-anchor-id="module-6-metal-switching-module">Module 6: Metal Switching Module</h2>
+<p>Run each module for each metal and combine the results with the original data frame.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
