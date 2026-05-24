@@ -226,5 +226,5 @@ source(here("modules/metal_switching.R"))
 Metals produced, collected, recycled, and waste generated after one full cycle.
 
 ```{r}
-full_metal_cycle
+metal_full_cycle
 ```

@@ -105,6 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#module-5-waste" id="toc-module-5-waste" class="nav-link" data-scroll-target="#module-5-waste">Module 5: Waste</a></li>
   <li><a href="#module-6-metal-switching-module" id="toc-module-6-metal-switching-module" class="nav-link" data-scroll-target="#module-6-metal-switching-module">Module 6: Metal Switching Module</a></li>
   </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
   </ul>
 </nav>
 </div>
@@ -212,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      day month electricity_cost electricity
-1 Tuesday     1         20.76363        high</code></pre>
+1 Tuesday     1         13.57476         low</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show code</summary>
@@ -282,9 +283,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal     mass collection_rate production_rate recycling_rate
-1    steel 61.95984            0.95       0.3505881      0.2447764
-2 aluminum 44.03906            0.70       0.3505881      0.2447764
-3   copper 88.50106            0.50       0.3505881      0.2447764</code></pre>
+1    steel 67.67806            0.95      0.07088776      0.4596831
+2 aluminum 19.94327            0.70      0.07088776      0.4596831
+3   copper 88.66138            0.50      0.07088776      0.4596831</code></pre>
 </div>
 <details class="code-fold">
 <summary>Show code</summary>
@@ -292,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>      day month electricity_cost electricity
-1 Tuesday     1         19.39105        high</code></pre>
+1 Tuesday     1         19.07905        high</code></pre>
 </div>
 </div>
 <section id="initialize-recycled-metal-value" class="level3">
@@ -327,9 +328,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal produced_metal
-1    steel       21.72238
-2 aluminum       15.43957
-3   copper       31.02742</code></pre>
+1    steel       4.797547
+2 aluminum       1.413734
+3   copper       6.285007</code></pre>
 </div>
 </div>
 </section>
@@ -353,9 +354,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal collected_scrap
-1    steel        20.63626
-2 aluminum        10.80770
-3   copper        15.51371</code></pre>
+1    steel       4.5576693
+2 aluminum       0.9896138
+3   copper       3.1425034</code></pre>
 </div>
 </div>
 </section>
@@ -379,9 +380,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal recycled_metal
-1    steel       5.051271
-2 aluminum       2.645470
-3   copper       3.797390</code></pre>
+1    steel      2.0950834
+2 aluminum      0.4549087
+3   copper      1.4445556</code></pre>
 </div>
 </div>
 </section>
@@ -408,9 +409,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>     metal    waste
-1    steel 45.13842
-2 aluminum 35.22929
-3   copper 75.85523</code></pre>
+1    steel 64.25240
+2 aluminum 19.19945
+3   copper 86.29939</code></pre>
 </div>
 </div>
 </section>
@@ -425,6 +426,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 </div>
 </section>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>Metals produced, collected, recycled, and waste generated after one full cycle.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>metal_full_cycle</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     metal     mass collection_rate production_rate recycling_rate
+1 aluminum 19.94327            0.70      0.07088776      0.4596831
+2   copper 88.66138            0.50      0.07088776      0.4596831
+3    steel 67.67806            0.95      0.07088776      0.4596831
+  produced_metal collected_scrap recycled_metal    waste
+1       1.413734       0.9896138      0.4549087 19.19945
+2       6.285007       3.1425034      1.4445556 86.29939
+3       4.797547       4.5576693      2.0950834 64.25240</code></pre>
+</div>
+</div>
 </section>
 
 </main>
