@@ -15,7 +15,9 @@ format:
 # Metal Recycling Program
 
 ## Setup
+
 Clear the environment
+
 ```{r}
 # clear the environment
 rm(list = ls())
@@ -23,6 +25,7 @@ rm(list = ls())
 ```
 
 Load packages: here, knitr
+
 ```{r}
 # load needed libraries
 library(here)
@@ -64,6 +67,12 @@ electricity_rates
 
 ```
 
+**Testing Options**
+
+- Inputs for the cost of electric —\> should be month, day
+  - month input should be greater than 0 less than or equal to 12 to account for each month
+  - day input should be the names of the days of the week, and should match the strings exactly case-wise, with capital.
+
 ### **Run the Electricity module 2x - choose weekend or weekday**
 
 **Weekend**
@@ -88,6 +97,7 @@ electricity_rates <- expensive_electricity
 We created a data frame with initial metal, mass, collection rate, production, rate, and recycling rate data.
 
 Production rate and recycling rate both use the output from the cost of electricity module.
+
 ```{r}
 
 # make a dataframe with metal ore information
@@ -121,6 +131,10 @@ metal_ore
 electricity_rates
 
 ```
+
+**Testing Options**
+
+- 
 
 ### Initialize Recycled Metal Value
 
@@ -171,6 +185,10 @@ data.frame(
 )
 
 ```
+
+**Testing Options**
+
+- These values should be smaller than the production values
 
 ## Module 4: Recycling
 
