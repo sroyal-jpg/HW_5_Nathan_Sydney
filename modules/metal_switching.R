@@ -90,7 +90,9 @@ weekend_metal_transformed <- data.frame(
 )
 
 # merge transformed metals and metal ore data frames
-week_metal_full_cycle <- merge(metal_ore, week_metal_transformed)
-weekend_metal_full_cycle <- merge(metal_ore, weekend_metal_transformed)
+week_metal_full_cycle <- merge(metal_ore, week_metal_transformed) |>
+  select(-weekend_production_rate, -weekend_recycling_rate)
+weekend_metal_full_cycle <- merge(metal_ore, weekend_metal_transformed) |>
+  select(-week_production_rate, -week_recycling_rate)
 
 

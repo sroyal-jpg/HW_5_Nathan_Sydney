@@ -30,6 +30,7 @@ Load packages: here, knitr
 # load needed libraries
 library(here)
 library(knitr)
+library(tidyverse)
 ```
 
 ## Program Schematic
