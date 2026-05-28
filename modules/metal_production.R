@@ -3,14 +3,10 @@
 
 # CONTRACT
 
-# inputs: metal ore, recycled metal, production rate (% H/L)
+# inputs: metal ore, recycled metal
 # output: primary metal
 
 # parameters
-### production rate
-### metal ore
-### recycled metal
-
 #' @param production rate (%)
 
 

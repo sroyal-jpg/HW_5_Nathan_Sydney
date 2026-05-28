@@ -3,13 +3,10 @@
 
 # CONTRACT
 
-# inputs: primary metal (MT), collection rate (%), recycled metal (MT), recycling rate (%), mass (MT)
-# output: waste metal (MT)
+# inputs: primary metal (Mt),  recycled metal (Mt),  mass (Mt)
+# output: waste metal (Mt)
 
 # parameters
-## collection rate
-## recycling rate
-
 #' @param collection rate (%)
 #' @param recycling rate (%)
 

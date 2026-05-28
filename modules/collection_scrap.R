@@ -3,12 +3,10 @@
 
 # CONTRACT
 
-# inputs: primary metal (MT), collection rate (%)
-# output: scrap metal (MT)
+# inputs: primary metal (Mt), collection rate (%)
+# output: scrap metal (Mt)
 
 # parameters
-## collection rate
-
 #' @param collection rate (%)
 
 # function definition

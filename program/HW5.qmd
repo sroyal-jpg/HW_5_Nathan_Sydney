@@ -1,7 +1,7 @@
 ---
 title: "Assignment 5"
 author: "Nathan Lau, Sydney Royal"
-date: "May 23, 2026"
+date: "May 28, 2026"
 format:
   html:
     theme: united
@@ -13,6 +13,30 @@ format:
 ---
 
 # Metal Recycling Program
+
+## Contract
+
+**Inputs:**
+
+- Metal ore (Mt)
+
+**Parameters:**
+
+- Day of the week
+- Month
+- Weekday cost of electricity (\$/kWh)
+- Weekend cost of electricity (\$/kWh)
+- Production rate (%)
+- Collection rate (%)
+- Recycling rate (%)
+- Metal type
+
+**Outputs:**
+
+- Produced metal (Mt)
+- Scrap metal (Mt)
+- Recycled metal (Mt)
+- Waste (Mt)
 
 ## Setup
 
@@ -36,7 +60,7 @@ library(tidyverse)
 ## Program Schematic
 
 ```{r}
-knitr::include_graphics(here::here("program", "program_schematic.png"))
+knitr::include_graphics(here::here("program", "program_schematic2.png"))
 ```
 
 # Modules
