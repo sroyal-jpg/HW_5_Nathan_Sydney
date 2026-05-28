@@ -82,17 +82,19 @@ electricity_rates
 
 ```{r}
 #### THIS MODULE NEEDS TO RUN TWICE
-cheap_electricity<- cost_of_electric(6,"Saturday")
+weekend_electricity<- cost_of_electric(6,"Saturday")
 
-electricity_rates <- cheap_electricity
+# this says that this is equal to the cheap electricity data
+weekend_electricity
 ```
 
 **Weekday**
 
 ```{r}
-expensive_electricity<- cost_of_electric(1,"Tuesday")
+week_electricity<- cost_of_electric(1,"Tuesday")
 
-electricity_rates <- expensive_electricity
+# this says that this is equal to the cheap electric data
+week_electricity
 ```
 
 ### Metal Ore Data frame
@@ -116,22 +118,39 @@ metal_ore <- data.frame(
 )
 
 # production rate depends on electricity
-metal_ore$production_rate <- ifelse(
-  electricity_rates$electricity == "high",
+metal_ore$weekend_production_rate <- ifelse(
+  weekend_electricity$electricity == "high",
   runif(length(metal), 0, 0.5),
   runif(length(metal), 0.6, 1)
 )
 
 # recycling rate depends on electricity
-metal_ore$recycling_rate <- ifelse(
-  electricity_rates$electricity == "high",
+metal_ore$weekend_recycling_rate <- ifelse(
+  weekend_electricity$electricity == "high",
+  runif(length(metal), 0, 0.5),
+  runif(length(metal), 0.6, 1)
+)
+  
+# duplicating the production and recycling parts to call twice
+# production rate depends on electricity
+# figure out what's wrong after duplicating it ### left off
+metal_ore$week_production_rate <- ifelse(
+  week_electricity$electricity == "high",
+  runif(length(metal), 0, 0.5),
+  runif(length(metal), 0.6, 1)
+)
+
+# recycling rate depends on electricity
+metal_ore$week_recycling_rate <- ifelse(
+  week_electricity$electricity == "high",
   runif(length(metal), 0, 0.5),
   runif(length(metal), 0.6, 1)
 )
 
 # return the ore information and the electricity rates for context
 metal_ore
-electricity_rates
+week_electricity
+weekend_electricity
 
 ```
 
@@ -155,13 +174,20 @@ From starting metal mass plus recycled metal, use production rate to calculate h
 # call the metal production module
 source(here("modules/metal_production.R"))
 
-## run it
-produced_metal<- metal_production(metal_ore$mass, 
+## run it with just the week data
+week_produced_metal<- metal_production(metal_ore$mass, 
                                  recycled_metal, 
-                                 metal_ore$production_rate)
+                                 metal_ore$week_production_rate)
+
+## run it with just the weekend data
+weekend_produced_metal<- metal_production(metal_ore$mass, 
+                                       recycled_metal, 
+                                       metal_ore$weekend_production_rate)
+
 data.frame(
   metal= metal, 
-  produced_metal
+  week_produced_metal,
+  weekend_produced_metal
 )
 
 ```
@@ -188,13 +214,18 @@ From produced metal, use collection rate to calculate how much scrap metal is co
 # collection
 source(here("modules/collection_scrap.R"))
 
-## run it
-collected_scrap<- collection_scrap(produced_metal,
+## run it for just the week
+week_collected_scrap<- collection_scrap(week_produced_metal,
+                                   metal_ore$collection_rate)
+
+## run for the weekend
+weekend_collected_scrap<- collection_scrap(weekend_produced_metal,
                                    metal_ore$collection_rate)
 
 data.frame(
   metal= metal, 
-  collected_scrap
+  week_collected_scrap,
+  weekend_collected_scrap
 )
 
 ```
@@ -212,13 +243,19 @@ From collected scrap metal, use recycling rate to calculate how much metal is re
 # recycling
 source(here("modules/scrap_recycling.R"))
 
-## run it
-recycled_metal <- scrap_recycling(collected_scrap, 
-                          metal_ore$recycling_rate)
+## run it for the week
+week_recycled_metal <- scrap_recycling(week_collected_scrap, 
+                          metal_ore$week_recycling_rate)
+
+## run it for the weekend
+weekend_recycled_metal <- scrap_recycling(weekend_collected_scrap, 
+                                  metal_ore$weekend_recycling_rate)
+
 
 data.frame(
   metal = metal,
-  recycled_metal
+  week_recycled_metal,
+  weekend_recycled_metal
 )
 ```
 
@@ -230,16 +267,24 @@ From the remaining produced metal not collected and collected scrap not recycled
 # waste
 source(here("modules/waste_loss.R"))
 
-## run it
-waste <- waste_loss(produced_metal, 
+## run it for the week
+week_waste <- waste_loss(week_produced_metal, 
                     metal_ore$collection_rate,
-                    recycled_metal,
-                    metal_ore$recycling_rate,
+                    week_recycled_metal,
+                    metal_ore$week_recycling_rate,
+                    metal_ore$mass)
+
+## run it for the weekend
+weekend_waste <- waste_loss(weekend_produced_metal, 
+                    metal_ore$collection_rate,
+                    week_recycled_metal,
+                    metal_ore$weekend_recycling_rate,
                     metal_ore$mass)
 
 data.frame(
   metal = metal,
-  waste
+  week_waste, 
+  weekend_waste
 )
 
 ```
@@ -258,5 +303,6 @@ source(here("modules/metal_switching.R"))
 Metals produced, collected, recycled, and waste generated after one full cycle.
 
 ```{r}
-metal_full_cycle
+week_metal_full_cycle
+weekend_metal_full_cycle
 ```
