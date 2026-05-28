@@ -42,7 +42,7 @@ knitr::include_graphics(here::here("program", "program_schematic.png"))
 
 ## Module 1: Cost of Electricity
 
-For electricity cost to influence the production and recycling rates, we created a random uniform distribution with electricity costs that then ranks them as high or low depending on the value of the output.
+For electricity cost to influence the production and recycling rates of metal, we created a random uniform distribution with electricity costs that then ranks them as high or low depending on the value of the output.
 
 - Range 10-30 cents/kWh (based on average electricity costs)
 
@@ -95,7 +95,7 @@ expensive_electricity<- cost_of_electric(1,"Tuesday")
 electricity_rates <- expensive_electricity
 ```
 
-## Metal Ore Data frame
+### Metal Ore Data frame
 
 We created a data frame with initial metal, mass, collection rate, production, rate, and recycling rate data.
 
