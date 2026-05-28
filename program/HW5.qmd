@@ -57,11 +57,6 @@ For electricity cost to influence the production and recycling rates of metal, w
 
 source(here("modules/electricity_cost.R"))
 
-# default is a random scenario, but can be changed
-electricity_rates<- cost_of_electric(1,"Tuesday")
-electricity_rates
-
-
 # this can be run for multiple days -- right now it's set to have the highest electricity costs during months, 6, 7, and 8 as well as during the weekdays. 
 
 ## weekends have a 50% discount on electricity
