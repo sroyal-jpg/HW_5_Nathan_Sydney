@@ -71,7 +71,10 @@ electricity_rates
 
 - Inputs for the cost of electric —\> should be month, day
   - month input should be greater than 0 less than or equal to 12 to account for each month
+    - expect_true (month \> 0)
+    - expect_true (month \< 12)
   - day input should be the names of the days of the week, and should match the strings exactly case-wise, with capital.
+    - how do i make sure it matches exactly to a range of different strings?
 
 ### **Run the Electricity module 2x - choose weekend or weekday**
 
@@ -132,10 +135,6 @@ electricity_rates
 
 ```
 
-**Testing Options**
-
-- 
-
 ### Initialize Recycled Metal Value
 
 Initialize recycled metal so that metal production eventually knows what to add once it goes through the next iterations.
@@ -167,6 +166,20 @@ data.frame(
 
 ```
 
+**Testing Options**
+
+- Things that can be changed= mass, recycled metal amount, and production rate
+
+  - the production rate needs to be less than 1 and positive
+
+  - amount of metal ore and recycled metal should be positive
+
+    - expect_true (metal_ore\$mass \> 0)
+
+    - expect_true (recycled_metal \> 0)
+
+    - expect_true (production_rate \< 1)
+
 ## Module 3: Collection
 
 From produced metal, use collection rate to calculate how much scrap metal is collected.
@@ -189,6 +202,7 @@ data.frame(
 **Testing Options**
 
 - These values should be smaller than the production values
+  - expect_true (metal_ore\$collected_scrap \< metal_ore\$produced_metal)
 
 ## Module 4: Recycling
 
