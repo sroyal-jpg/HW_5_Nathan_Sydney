@@ -1,7 +1,7 @@
 ---
-title: "Assignment 5"
+title: "Assignment 5-6"
 author: "Nathan Lau, Sydney Royal"
-date: "May 28, 2026"
+date: "June 2, 2026"
 format:
   html:
     theme: united
@@ -284,6 +284,16 @@ data.frame(
 )
 ```
 
+### Test Recycling
+
+```{r}
+
+test_file(here("tests/recycling_test.R"))
+
+# expecting 2 passes
+
+```
+
 ## Module 5: Waste
 
 From the remaining produced metal not collected and collected scrap not recycled, use collection rate and recycling rate to calculate how much metal and ore waste is generated.
@@ -314,6 +324,16 @@ data.frame(
 
 ```
 
+### Test Waste
+
+```{r}
+
+test_file(here("tests/waste_test.R"))
+
+# expecting 2 passes
+
+```
+
 ## Module 6: Metal Switching Module
 
 Run each module for each metal and combine the results with the original data frame.
@@ -321,6 +341,16 @@ Run each module for each metal and combine the results with the original data fr
 ```{r}
 # metal switching
 source(here("modules/metal_switching.R"))
+```
+
+### Test Switching
+
+```{r}
+
+test_file(here("tests/switching_test.R"))
+
+# expecting 2 passes
+
 ```
 
 # Results
