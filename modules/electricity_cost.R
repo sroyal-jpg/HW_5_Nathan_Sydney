@@ -3,7 +3,7 @@
 
 
 # inputs: month, day
-# output: scrap metal (MT)
+# output: scrap metal (Mt)
 
 #' @param month
 #' @param day

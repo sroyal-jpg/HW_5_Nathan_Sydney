@@ -3,12 +3,10 @@
 
 # CONTRACT
 
-# inputs: scrap metal (MT), recycling rate (%)
-# output: recycled metal (MT)
+# inputs: scrap metal (Mt)
+# output: recycled metal (Mt)
 
 # parameters
-## recycling rate
-
 #' @param recycling rate (%)
 
 # function definition
