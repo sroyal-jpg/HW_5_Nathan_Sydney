@@ -18,3 +18,4 @@ collection_scrap = function(produced_metal, collection_rate) {
   
   return(collected_scrap)
 }
+# note
