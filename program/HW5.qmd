@@ -236,7 +236,7 @@ test_file(here("tests/test_collection_scrap.R"))
 
 ```
 
-## Module 4: Recycling- something
+## Module 4: Recycling
 
 From collected scrap metal, use recycling rate to calculate how much metal is recycled.
 
