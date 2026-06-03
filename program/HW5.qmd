@@ -288,7 +288,7 @@ data.frame(
 
 ```{r}
 
-test_file(here("tests/recycling_test.R"))
+test_file(here("tests/test_scrap_recycling.R"))
 
 # expecting 2 passes
 
@@ -328,7 +328,7 @@ data.frame(
 
 ```{r}
 
-test_file(here("tests/waste_test.R"))
+test_file(here("tests/test_waste_loss.R"))
 
 # expecting 2 passes
 
@@ -347,7 +347,7 @@ source(here("modules/metal_switching.R"))
 
 ```{r}
 
-test_file(here("tests/switching_test.R"))
+test_file(here("tests/test_metal_switching.R"))
 
 # expecting 2 passes
 
