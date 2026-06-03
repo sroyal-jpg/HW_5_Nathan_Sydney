@@ -57,6 +57,7 @@ library(knitr)
 library(tidyverse)
 library(testthat)
 library(roxygen2)
+library(devtools)
 ```
 
 ## Program Schematic
