@@ -1,6 +1,5 @@
-
-# RECYCLING OF SCRAP METAL MODULE
-
+#' Recycling Module
+#'
 #' @param recycling_rate Percentage of collected scrap metal that is successfully recycled.
 #' @param collected_scrap Amount of produced metal that is collected as scrap in Mt.
 #' @return recycled_metal Amount of collected scrap metal that is recycled in Mt.
