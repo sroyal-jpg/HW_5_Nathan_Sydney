@@ -1,5 +1,4 @@
-
-#' collection_scrap
+#' Scrap Collection Module
 #' 
 #' This function determines the amount of scrap metal collected after metal was produced by a given collection rate for a metal ore type
 #' @param collection_rate Percent (between 0-1) of metal collected
