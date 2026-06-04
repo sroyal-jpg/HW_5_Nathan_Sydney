@@ -1,12 +1,9 @@
-
-# COST OF ELECTRICITY MODULE
-
-
-# inputs: month, day
-# output: scrap metal (Mt)
-
-#' @param month
-#' @param day
+#' Cost of Electricity Module
+#'
+#' @param month Calendar month
+#' @param day Day of the week
+#' @return electricity_cost Price of electricity given a month and day of the week in $/kWh
+#' @author Sydney
 
 
 ### MAKE THIS NOT A FOR LOOP
